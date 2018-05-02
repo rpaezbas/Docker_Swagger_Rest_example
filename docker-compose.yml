@@ -1,0 +1,35 @@
+version: "3.1"
+services:
+
+ db:
+   image: postgres:9.6.1
+   environment:
+     POSTGRES_DB: test
+     POSTGRES_PASSWORD: adminadmin
+
+ mq:
+   image: rmohr/activemq
+   ports:
+     - "8161:8161"
+     - "61616:61616"
+
+ #this images have been build by myself, they extend a payara image and include of copy the applications to deploy in 
+ #the path glassfish/domains/domain1/autodeploy
+ 
+ dockerdb:
+   image: dockerdb
+   ports:
+     - "8080:8080"
+     - "4848:4848"
+     - "8181:8181"
+
+ dockerdb2:
+   image: glassfish_swagger
+   ports:
+     - "8081:8080"
+     - "4849:4848"
+     - "8182:8181"
+
+
+    
+          

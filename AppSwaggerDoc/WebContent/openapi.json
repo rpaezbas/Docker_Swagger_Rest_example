@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "description": "This is a test api documentation for a learning App.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "Car",
+      "description": "Application Car information"
+    },
+    {
+      "name": "Brand",
+      "description": "Application Car brands information"
+    }
+  ],
+  "paths": {
+    "/api/cars": {
+      "get": {
+        "operationId": "getAllCars",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything ok."
+          },
+          "403": {
+            "description": "Invalid token."
+          },
+          "404": {
+            "description": "No cars found."
+          }
+        }
+      },
+      "post": {
+        "operationId": "postCar",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Everything ok."
+          },
+          "403": {
+            "description": "Invalid token."
+          },
+          "405": {
+            "description": "The request is not well-formed."
+          }
+        }
+      }
+    },
+    "/api/cars/{carId}": {
+      "get": {
+        "operationId": "getCarbyId",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything ok."
+          },
+          "403": {
+            "description": "Invalid token."
+          },
+          "404": {
+            "description": "No car found."
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateCar",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Everything ok."
+          },
+          "403": {
+            "description": "Invalid token."
+          },
+          "404": {
+            "description": "The car to be updated does not exist."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteCarbyId",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything ok."
+          },
+          "403": {
+            "description": "Invalid token."
+          },
+          "404": {
+            "description": "The car to be deleted does not exist."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Brand": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "registration": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "country": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "brand": {
+            "$ref": "#/components/schemas/Brand"
+          }
+        }
+      }
+    }
+  }
+}
